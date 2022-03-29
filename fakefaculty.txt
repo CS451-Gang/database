@@ -1,0 +1,5 @@
+INSERT INTO Faculty (Faculty_ID , Faculty_FName, Faculty_LName, Faculty_Email)
+VALUES ('184038630','Terry','Shuga','terryshuga@umsystem.edu')
+ ('138014311','Terry','Nouzen','terrynouzen@umsystem.edu')
+ ('170973979','Terry','Ince','terryince@umsystem.edu')
+ ('178773869','Lena','Shuga','lenashuga@umsystem.edu')
