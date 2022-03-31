@@ -1,45 +1,47 @@
-CREATE DATABASE IF NOT EXISTS UMKC_Db;
-USE UMKC_Db;
-CREATE TABLE IF NOT EXISTS Student (
-    Student_ID INT NOT NULL,
-    Student_FName VARCHAR (20) NOT NULL,
-    Student_LName VARCHAR (20) NOT NULL,
-    Student_Email VARCHAR(30) NOT NULL,
-    Student_InternationalStatus BOOLEAN,
-    Student_GTACert BOOLEAN,
-    Student_Qualifications VARCHAR(10),
-    Student_Major VARCHAR(20),
-    Student_NumOfSem INT NOT NULL,
-    PRIMARY KEY (Student_ID)
+CREATE DATABASE IF NOT EXISTS gta;
+USE gta;
+CREATE TABLE IF NOT EXISTS applications (
+    id INT NOT NULL,
+    full_name VARCHAR (100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    current_level ENUM('BS', 'MS', 'PhD') NOT NULL,
+    graduating_semester VARCHAR(50) NOT NULL,
+    cumulative_gpa VARCHAR(10) NOT NULL,
+    hours_completed INT NOT NULL,
+    undergraduate_degree VARCHAR(100) NOT NULL,
+    current_major ENUM('CS', 'IT', 'ECE', 'EE') NOT NULL,
+    applying_for ENUM('Grader', 'Lab Instructor', 'Both') NOT NULL,
+    international_student BOOLEAN NOT NULL,
+    gta_certified BOOLEAN,
+    gta_certification_term VARCHAR(50),
+    gta_previous_degree BOOLEAN,
+    PRIMARY KEY (id)
 );
-CREATE TABLE IF NOT EXISTS Course (
-    Course_ID INT NOT NULL,
-    Course_Name VARCHAR(20),
-    PRIMARY KEY (Course_ID)
+CREATE TABLE IF NOT EXISTS students (
+    id INT NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
 );
-CREATE TABLE IF NOT EXISTS Grade (
-    Student_ID INT NOT NULL,
-    Course_ID INT NOT NULL,
-    Grade_Value VARCHAR(1),
-    PRIMARY KEY (Student_ID, Course_ID),
-    FOREIGN KEY (Student_ID) references Student (Student_ID) ON DELETE RESTRICT,
-    FOREIGN KEY (Course_ID) references Course (Course_ID) ON DELETE RESTRICT
+CREATE TABLE IF NOT EXISTS faculty (
+    id INT NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
 );
-CREATE TABLE IF NOT EXISTS Faculty (
-    Faculty_ID INT NOT NULL,
-    Faculty_FName VARCHAR(20) NOT NULL,
-    Faculty_LName VARCHAR(20) NOT NULL,
-    Faculty_Email VARCHAR(30) NOT NULL,
-    PRIMARY KEY (Faculty_ID)
+CREATE TABLE IF NOT EXISTS courses (
+    id VARCHAR(20) NOT NULL,
+    course_name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
 );
-CREATE TABLE IF NOT EXISTS Positions (
-    Position_ID INT NOT NULL,
-    Student_ID INT NOT NULL,
-    Faculty_ID INT NOT NULL,
-    Course_ID INT NOT NULL,
-    Position_Type VARCHAR(10) NOT NULL,
-    PRIMARY KEY (Position_ID),
-    FOREIGN KEY (Student_ID) references Student (Student_ID) ON DELETE RESTRICT,
-    FOREIGN KEY (Faculty_ID) references Faculty (Faculty_ID) ON DELETE RESTRICT,
-    FOREIGN KEY (Course_ID) references Course (Course_ID) ON DELETE RESTRICT
+CREATE TABLE IF NOT EXISTS positions (
+    id INT NOT NULL AUTO_INCREMENT,
+    student_id INT,
+    faculty_id INT NOT NULL,
+    course_id VARCHAR(20) NOT NULL,
+    position_type ENUM('Grader', 'Lab Instructor', 'Both') NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (student_id) references students (id) ON DELETE RESTRICT,
+    FOREIGN KEY (faculty_id) references faculty (id) ON DELETE RESTRICT,
+    FOREIGN KEY (course_id) references courses (id) ON DELETE RESTRICT
 );
