@@ -15,7 +15,7 @@ Student_NumOfSem INT NOT NULL,
 PRIMARY KEY (Student_ID));
 
 CREATE TABLE Course
-(Course_ID INT NOT NULL,
+(Course_ID VARCHAR(10) NOT NULL,
 Course_Type VARCHAR(20),
 PRIMARY KEY (Course_ID));
 
