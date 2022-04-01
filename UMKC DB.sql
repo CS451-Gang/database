@@ -16,7 +16,7 @@ PRIMARY KEY (Student_ID));
 
 CREATE TABLE Course
 (Course_ID INT NOT NULL,
-Course_Name VARCHAR(20),
+Course_Type VARCHAR(20),
 PRIMARY KEY (Course_ID));
 
 CREATE TABLE Grade
