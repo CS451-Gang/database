@@ -12,7 +12,7 @@ INSERT INTO courses (id, course_name) VALUES
 INSERT INTO faculty (id, full_name, email) VALUES
     (1, 'John Smith', 'john.smith@umsystem.edu'),
     (2, 'Jane Doe', 'jane.doe@umsystem.edu'),
-    (3, 'Tony Soprano', 'tony.soprano@umsystem.edu');
+    (3, 'Brian Hare', 'brian.hare@umsystem.edu');
 
 
 INSERT INTO positions (faculty_id, course_id, position_type) VALUES

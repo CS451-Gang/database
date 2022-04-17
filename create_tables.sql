@@ -34,13 +34,21 @@ CREATE TABLE IF NOT EXISTS courses (
     course_name VARCHAR(100) NOT NULL,
     PRIMARY KEY (id)
 );
+CREATE TABLE IF NOT EXISTS grades(
+    student_id INT NOT NULL,
+    course_id VARCHAR(20) NOT NULL,
+    grade_value ENUM('A', 'B', 'C', 'D', 'F') NOT NULL,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) references students (id) ON DELETE RESTRICT,
+    FOREIGN KEY (course_id) references courses (id) ON DELETE RESTRICT
+);
 CREATE TABLE IF NOT EXISTS positions (
-    id INT NOT NULL AUTO_INCREMENT,
+    position_id INT NOT NULL AUTO_INCREMENT,
     student_id INT,
     faculty_id INT NOT NULL,
     course_id VARCHAR(20) NOT NULL,
-    position_type ENUM('Grader', 'Lab Instructor', 'Both') NOT NULL,
-    PRIMARY KEY (id),
+    position_type ENUM('Grader', 'Lab Instructor') NOT NULL,
+    PRIMARY KEY (position_id),
     FOREIGN KEY (student_id) references students (id) ON DELETE RESTRICT,
     FOREIGN KEY (faculty_id) references faculty (id) ON DELETE RESTRICT,
     FOREIGN KEY (course_id) references courses (id) ON DELETE RESTRICT
