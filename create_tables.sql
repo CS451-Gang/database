@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS applications (
     graduating_semester VARCHAR(50) NOT NULL,
     cumulative_gpa VARCHAR(10) NOT NULL,
     hours_completed INT NOT NULL,
-    undergraduate_degree VARCHAR(100) NOT NULL,
+    undergraduate_degree VARCHAR(100),
     current_major ENUM('CS', 'IT', 'ECE', 'EE') NOT NULL,
     applying_for ENUM('Grader', 'Lab Instructor', 'Both') NOT NULL,
     international_student BOOLEAN NOT NULL,
@@ -52,4 +52,16 @@ CREATE TABLE IF NOT EXISTS positions (
     FOREIGN KEY (student_id) references students (id) ON DELETE RESTRICT,
     FOREIGN KEY (faculty_id) references faculty (id) ON DELETE RESTRICT,
     FOREIGN KEY (course_id) references courses (id) ON DELETE RESTRICT
+);
+
+DROP TABLE IF EXISTS accounts;
+
+CREATE TABLE IF NOT EXISTS accounts (
+    user_id INT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_salt TEXT NOT NULL,
+    password_hash TEXT NOT NULL,
+    user_type ENUM('student', 'faculty') NOT NULL,
+    
+    PRIMARY KEY (user_id)
 );
