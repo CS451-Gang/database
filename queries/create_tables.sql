@@ -57,11 +57,16 @@ CREATE TABLE IF NOT EXISTS positions (
 DROP TABLE IF EXISTS accounts;
 
 CREATE TABLE IF NOT EXISTS accounts (
-    user_id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password_salt TEXT NOT NULL,
     password_hash TEXT NOT NULL,
     user_type ENUM('student', 'faculty') NOT NULL,
     
-    PRIMARY KEY (user_id)
+    PRIMARY KEY (id)
 );
+
+-- ALTER TABLE applications ADD CONSTRAINT
+--     fk_applications_students
+--     FOREIGN KEY (id)
+--     REFERENCES students (id);
