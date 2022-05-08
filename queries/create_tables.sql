@@ -1,7 +1,8 @@
 CREATE DATABASE IF NOT EXISTS gta;
 USE gta;
 CREATE TABLE IF NOT EXISTS applications (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    student_id INT NOT NULL,
     full_name VARCHAR (100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     current_level ENUM('BS', 'MS', 'PhD') NOT NULL,
@@ -10,7 +11,11 @@ CREATE TABLE IF NOT EXISTS applications (
     hours_completed INT NOT NULL,
     undergraduate_degree VARCHAR(100),
     current_major ENUM('CS', 'IT', 'ECE', 'EE') NOT NULL,
-    applying_for ENUM('Grader', 'Lab Instructor', 'Both') NOT NULL,
+    applying_for ENUM('Grader', 'Lab Instructor', 'Both'),
+    -- Strictly speaking, course_id and grade_value should probably be
+    -- normalized to a separate table. This works, but isn't optimal.
+    course_id VARCHAR(20) NOT NULL,
+    grade_value ENUM('A', 'B', 'C', 'D', 'F') NOT NULL,
     international_student BOOLEAN NOT NULL,
     gta_certified BOOLEAN,
     gta_certification_term VARCHAR(50),
